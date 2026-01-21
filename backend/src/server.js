@@ -2,12 +2,14 @@ import express from "express"
 import dotenv from 'dotenv'
 import authRoutes from './routes/auth.route.js'
 import messageRoute from './routes/message.route.js'
+import cookieParser from 'cookie-parser'
 import {connectDb} from './lib/db.js'
 import path from "path"
 dotenv.config({ path: "./src/.env" })
 
 const app = express()
 app.use(express.json())
+app.use(cookieParser())
 app.use((req, res, next) => {
   console.log("Incoming:", req.method, req.url)
   next()
