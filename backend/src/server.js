@@ -4,10 +4,15 @@ import authRoutes from './routes/auth.route.js'
 import messageRoute from './routes/message.route.js'
 import cookieParser from 'cookie-parser'
 import {connectDb} from './lib/db.js'
+import cors from "cors"
 import path from "path"
 dotenv.config({ path: "./src/.env" })
 
 const app = express()
+app.use(cors({
+  origin:process.env.CLIENT_URL, // Your frontend URL
+  credentials: true                // Allows cookies to be sent
+}));
 app.use(express.json())
 app.use(cookieParser())
 app.use((req, res, next) => {
